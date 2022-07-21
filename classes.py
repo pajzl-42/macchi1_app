@@ -297,6 +297,7 @@ def constructor(data_from_gui):
     thickness = film_data[3]
     throughput = film_data[0]
     width = film_data[1]
+    name = title[0]
 
     thickness_per_layer = percentage_calculator(thickness, percentage_per_layer_data)
     throughput_per_layer = percentage_calculator(throughput, percentage_per_layer_data)
@@ -315,11 +316,11 @@ def constructor(data_from_gui):
     A_text = list_to_string(dosing_text_data[0])
     B_text = list_to_string(dosing_text_data[1])
     C_text = list_to_string(dosing_text_data[2])
-    text_filler = list_to_string(filler(144, 'text'))
+    text_filler = list_to_string(filler(146, 'text'))
     A_density = list_to_string(density_data[0])
     B_density = list_to_string(density_data[1])
     C_density = list_to_string(density_data[2])
-    density_filler = list_to_string(filler(144, 'zero'))
+    density_filler = list_to_string(filler(36, 'zero'))
     mfi_filler = list_to_string(filler(54, 'zero'))
     end_filler = list_to_string(filler(54, 'text'))
 
@@ -336,5 +337,13 @@ def constructor(data_from_gui):
         density_filler + "\n" + \
         end_filler
 
-    return final_output
+    return [final_output, name]
+
+def writer(data, name):
+    caption = name + '.rcp'
+    with open(caption, mode='w+') as file:
+        file.write(data)
+
+
+
 
