@@ -29,10 +29,10 @@ class Details_film:
     def window(self):
         self.col1, self.col2, self.col3 = st.columns(3)
         output_data = []
-        output_data.append(self.col1.number_input("Výkon [kg/h]"))
-        output_data.append(self.col2.number_input("Šířka [mm]"))
+        output_data.append(self.col1.number_input("Výkon [kg/h]", value=300))
+        output_data.append(self.col2.number_input("Šířka [mm]", value=980))
         output_data.append(0)
-        output_data.append(self.col3.number_input("Tloušťka [um]"))
+        output_data.append(self.col3.number_input("Tloušťka [um]", value=85))
         additional_data = [0,0,21,15,125,2,12,125,2,0,0]
         output_data += additional_data
         return output_data
@@ -52,8 +52,9 @@ class Details_temperature:
 
     def load_values(self, name):
         with open(name, mode="r") as file:
-            lines = file.readlines()
-            return lines
+            data = file.read().splitlines()
+            data = list(map(int, data))
+            return data
 
     def new_temp_regime(self):
         self.col1, self.col2, self.col3, self.col4 = st.columns(4)
@@ -117,7 +118,7 @@ class Body:
     def layer_A(self):
         with self.colA1:
             st.text("Procenta A")
-            A1p = st.number_input("A1 procenta [%]", min_value=0.0, max_value=100.0, step=0.1)
+            A1p = st.number_input("A1 procenta [%]", min_value=0.0, max_value=100.0, step=0.1, value=100.0)
             A2p = st.number_input("A2 procenta [%]", min_value=0.0, max_value=100.0, step=0.1)
             A3p = st.number_input("A3 procenta [%]", min_value=0.0, max_value=100.0, step=0.1)
             A4p = st.number_input("A4 procenta [%]", min_value=0.0, max_value=100.0, step=0.1)
@@ -134,7 +135,7 @@ class Body:
             layer_percentage = st.number_input("A layer output [%]", min_value=0, max_value=100, value=25)
         with self.colA3:
             st.text("Hustota složky A")
-            A1d = st.number_input("A1 hustota [g/Cm3]", min_value=0.0, max_value=10.0, step=0.001)
+            A1d = st.number_input("A1 hustota [g/Cm3]", min_value=0.0, max_value=10.0, step=0.001, value=0.95)
             A2d = st.number_input("A2 hustota [g/Cm3]", min_value=0.0, max_value=10.0, step=0.001)
             A3d = st.number_input("A3 hustota [g/Cm3]", min_value=0.0, max_value=10.0, step=0.001)
             A4d = st.number_input("A4 hustota [g/Cm3]", min_value=0.0, max_value=10.0, step=0.001)
@@ -145,7 +146,7 @@ class Body:
     def layer_B(self):
         with self.colB1:
             st.text("Procenta B")
-            B1p = st.number_input("B1 procenta [%]", min_value=0.0, max_value=100.0, step=0.1)
+            B1p = st.number_input("B1 procenta [%]", min_value=0.0, max_value=100.0, step=0.1, value=100.0)
             B2p = st.number_input("B2 procenta [%]", min_value=0.0, max_value=100.0, step=0.1)
             B3p = st.number_input("B3 procenta [%]", min_value=0.0, max_value=100.0, step=0.1)
             B4p = st.number_input("B4 procenta [%]", min_value=0.0, max_value=100.0, step=0.1)
@@ -162,7 +163,7 @@ class Body:
             layer_percentage = st.number_input("B layer output [%]", min_value=0, max_value=100, value=50)
         with self.colB3:
             st.text("Hustota složky B")
-            B1d = st.number_input("B1 hustota [g/Cm3]", min_value=0.0, max_value=10.0, step=0.001)
+            B1d = st.number_input("B1 hustota [g/Cm3]", min_value=0.0, max_value=10.0, step=0.001, value=0.95)
             B2d = st.number_input("B2 hustota [g/Cm3]", min_value=0.0, max_value=10.0, step=0.001)
             B3d = st.number_input("B3 hustota [g/Cm3]", min_value=0.0, max_value=10.0, step=0.001)
             B4d = st.number_input("B4 hustota [g/Cm3]", min_value=0.0, max_value=10.0, step=0.001)
@@ -173,7 +174,7 @@ class Body:
     def layer_C(self):
         with self.colC1:
             st.text("Procenta C")
-            C1p = st.number_input("C1 procenta [%]", min_value=0.0, max_value=100.0, step=0.1)
+            C1p = st.number_input("C1 procenta [%]", min_value=0.0, max_value=100.0, step=0.1, value=100.0)
             C2p = st.number_input("C2 procenta [%]", min_value=0.0, max_value=100.0, step=0.1)
             C3p = st.number_input("C3 procenta [%]", min_value=0.0, max_value=100.0, step=0.1)
             C4p = st.number_input("C4 procenta [%]", min_value=0.0, max_value=100.0, step=0.1)
@@ -190,7 +191,7 @@ class Body:
             layer_percentage = st.number_input("C layer output [%]", min_value=0, max_value=100, value=25)
         with self.colC3:
             st.text("Hustota složky C")
-            C1d = st.number_input("C1 hustota [g/cm3]", min_value=0.0, max_value=10.0, step=0.001)
+            C1d = st.number_input("C1 hustota [g/cm3]", min_value=0.0, max_value=10.0, step=0.001, value=0.95)
             C2d = st.number_input("C2 hustota [g/cm3]", min_value=0.0, max_value=10.0, step=0.001)
             C3d = st.number_input("C3 hustota [g/cm3]", min_value=0.0, max_value=10.0, step=0.001)
             C4d = st.number_input("C4 hustota [g/cm3]", min_value=0.0, max_value=10.0, step=0.001)
@@ -203,13 +204,10 @@ class Body:
         layer_A = Layer("A", self.layer_A())
         layer_B = Layer("B", self.layer_B())
         layer_C = Layer("C", self.layer_C())
-        dosing_filler = [0 for i in range(42)]
-        text_filler = ["" for i in range(36)]
-        density_filler = [0 for i in range(36)]
 
-        dosing_output = [layer_A.get_dosing_output(), layer_B.get_dosing_output(), layer_C.get_dosing_output(), dosing_filler]
-        text_output = [layer_A.get_text_output(), layer_B.get_text_output(), layer_C.get_text_output(), text_filler]
-        density_output = [layer_A.get_density_output(), layer_B.get_density_output(), layer_C.get_density_output(), density_filler]
+        dosing_output = [layer_A.get_dosing_output(), layer_B.get_dosing_output(), layer_C.get_dosing_output()]
+        text_output = [layer_A.get_text_output(), layer_B.get_text_output(), layer_C.get_text_output()]
+        density_output = [layer_A.get_density_output(), layer_B.get_density_output(), layer_C.get_density_output()]
 
         layer_percentage = [layer_A.get_layer_percentage(), layer_B.get_layer_percentage(), layer_C.get_layer_percentage()]
 
@@ -284,7 +282,7 @@ def gui():
 
     return data_from_gui
 
-def output(data_from_gui):
+def constructor(data_from_gui):
     title = data_from_gui['title_data']
     film_data = data_from_gui['film_data']
     temp_data = data_from_gui['temp_data']
@@ -293,8 +291,50 @@ def output(data_from_gui):
     dosing_data = data_from_gui['dosing_data']['dosing_output']
     dosing_text_data = data_from_gui['dosing_data']['text_output']
     density_data = data_from_gui['dosing_data']['density_output']
-    text_dosing_filler = ["" for i in range(54)]
-    number_dosing_filler = [0 for i in range(54)]
+    text_dosing_filler = filler(54, 'text')
+    number_dosing_filler = filler(54, 'zero')
 
-    #with open("export.rcp", mode=w+) as f:
+    thickness = film_data[3]
+    throughput = film_data[0]
+    width = film_data[1]
+
+    thickness_per_layer = percentage_calculator(thickness, percentage_per_layer_data)
+    throughput_per_layer = percentage_calculator(throughput, percentage_per_layer_data)
+
+    density_percentage_output = alternating_merge(density_per_layer_data, percentage_per_layer_data) + filler(34, 'zero')
+    thickness_throughput_output = alternating_merge(thickness_per_layer, throughput_per_layer) + filler(19, 'zero')
+
+    title_output = list_to_string(title)
+    temp_output = list_to_string(temp_data)
+    film_output = list_to_string(film_data) + "\n" + list_to_string(density_percentage_output) + "\n" + list_to_string(thickness_throughput_output)
+    draw_speed = str(line_speed(percentage_per_layer_data, thickness, throughput, density_per_layer_data, width))
+    A_dosing = list_to_string(dosing_data[0])
+    B_dosing = list_to_string(dosing_data[1])
+    C_dosing = list_to_string(dosing_data[2])
+    dosing_filler = list_to_string(filler(42, 'zero'))
+    A_text = list_to_string(dosing_text_data[0])
+    B_text = list_to_string(dosing_text_data[1])
+    C_text = list_to_string(dosing_text_data[2])
+    text_filler = list_to_string(filler(144, 'text'))
+    A_density = list_to_string(density_data[0])
+    B_density = list_to_string(density_data[1])
+    C_density = list_to_string(density_data[2])
+    density_filler = list_to_string(filler(144, 'zero'))
+    mfi_filler = list_to_string(filler(54, 'zero'))
+    end_filler = list_to_string(filler(54, 'text'))
+
+    final_output = title_output + "\n" + \
+        temp_output + "\n" + \
+        film_output + "\n" + \
+        draw_speed + "\n" + \
+        A_dosing + "\n" + B_dosing + "\n" + C_dosing + "\n" + \
+        dosing_filler + "\n" + \
+        A_text + B_text + C_text + "\n" + \
+        text_filler + "\n" + \
+        mfi_filler + "\n" + \
+        A_density + "\n" + B_density + "\n" + C_density + "\n" + \
+        density_filler + "\n" + \
+        end_filler
+
+    return final_output
 
