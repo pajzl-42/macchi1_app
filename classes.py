@@ -205,7 +205,7 @@ class Body:
         layer_C = Layer("C", self.layer_C())
 
         dosing_output = [layer_A.get_dosing_output(), layer_B.get_dosing_output(), layer_C.get_dosing_output()]
-        text_output = [layer_A.get_text_output(), layer_B.get_text_output(), layer_C.get_text_output()]
+        text_output = check_for_empty_values([layer_A.get_text_output(), layer_B.get_text_output(), layer_C.get_text_output()])
         density_output = [layer_A.get_density_output(), layer_B.get_density_output(), layer_C.get_density_output()]
 
         layer_percentage = [layer_A.get_layer_percentage(), layer_B.get_layer_percentage(), layer_C.get_layer_percentage()]
@@ -290,8 +290,6 @@ def constructor(data_from_gui):
     dosing_data = data_from_gui['dosing_data']['dosing_output']
     dosing_text_data = data_from_gui['dosing_data']['text_output']
     density_data = data_from_gui['dosing_data']['density_output']
-    text_dosing_filler = filler(54, 'text')
-    number_dosing_filler = filler(54, 'zero')
 
     thickness = film_data[3]
     throughput = film_data[0]
@@ -329,7 +327,7 @@ def constructor(data_from_gui):
         draw_speed + "\n" + \
         A_dosing + "\n" + B_dosing + "\n" + C_dosing + "\n" + \
         dosing_filler + "\n" + \
-        A_text + B_text + C_text + "\n" + \
+        A_text + "\n" + B_text + "\n" + C_text + "\n" + \
         text_filler + "\n" + \
         mfi_filler + "\n" + \
         A_density + "\n" + B_density + "\n" + C_density + "\n" + \

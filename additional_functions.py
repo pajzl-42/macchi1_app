@@ -21,7 +21,7 @@ def alternating_merge(list1,list2):
 
 def filler(length, mode):
     if mode == "text":
-        output_list = ["" for i in range(length)]
+        output_list = ['''""''' for i in range(length)]
     elif mode == "zero":
         output_list = [0 for i in range(length)]
     return output_list
@@ -39,5 +39,21 @@ def line_speed(percentage_list, thickness, throughput, density_per_layer_list, w
 
     final_result = sum([a * b * 0.01 for a, b in zip(percentage_list,output_list)])
     return final_result
+
+def check_for_empty_values(list_of_three_lists):
+    output_list = []
+    inner_list = []
+    for i in list_of_three_lists:
+        for j in i:
+            if j == "":
+                inner_list.append('''""''')
+            else:
+                inner_list.append(j)
+        output_list.append(inner_list)
+        inner_list = []
+    print(inner_list)
+    print(output_list)
+    return output_list
+
 
 
