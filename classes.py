@@ -17,7 +17,6 @@ class Title:
         self.col1, self.col2 = st.columns(2)
         product_number = self.col1.text_input("Číslo výrobku:")
         recipe_name = product_number
-        self.col2.button("Najdi recept v databázi")
         output_data = [recipe_name, product_number, "----------", "#FALSE#"]
 
         return output_data
@@ -343,6 +342,10 @@ def writer(data, name):
     caption = name + '.rcp'
     with open(caption, mode='w+') as file:
         file.write(data)
+
+def download_file(output_data,name):
+    st.download_button('Stáhnout recepturu', output_data, file_name=name + '.rcp')
+
 
 
 
